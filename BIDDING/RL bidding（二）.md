@@ -105,3 +105,13 @@ $$
 r(a, (t,b,x_t),(t-1,b,x_{t-1}))=0
 $$
 
+
+
+值迭代：
+$$
+V(t,b)=\max_{0 \le a \le b} \left( \sum_{\delta=0}^{a} m(\delta) \theta_{avg} + \sum_{\delta=0}^{a} m(\delta) V(t-1,b-\delta) + \sum_{\delta=a+1}^{\infty} m(\delta)V(t-1,b) \right)
+$$
+最优策略：
+$$
+a(t,b,x)=\arg\max_{0 \le a \le b} \left( \sum_{\delta=0}^a m(\delta,x) \left( \theta(x)+V(t-1,b-\delta) - V(t-1,b) \right) \right)
+$$
