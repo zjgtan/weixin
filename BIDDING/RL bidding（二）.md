@@ -48,3 +48,60 @@ $$
 
 **动态规划：求解最优策略**
 
+**策略迭代**
+
+1. 策略迭代：策略评估和策略提升不断循环交替，直至得到最优策略的过程。
+
+2. 策略评估：计算一个策略的状态价值函数，即用上一轮的状态价值函数来计算当前轮的状态价值函数，迭代N轮，直至收敛。
+   $$
+   V^{k+1}(s)=\sum_{a \in A} \pi(a|s) \left( r(s,a)+\gamma \sum_{s^{'} \in S} P(s^{'}|s,a)V^{k}(s^{'}) \right)
+   $$
+   
+3. 策略提升：根据当前策略的状态价值函数，改进策略。
+   $$
+   \pi^{'}(s)=\arg \max_{a} Q^{\pi}(s,a)=\arg \max_{a} \left( r(s,a) + \gamma \sum_{s^{'} \in S} P(s^{'}|s,a)V^{\pi}(s^{'}) \right)
+   $$
+   
+
+
+
+**值迭代**
+
+1. 更新状态价值函数
+
+$$
+V^{k+1}(s)=\max_{a \in A} \left( r(s,a) + \gamma \sum_{s^{'} \in S} P(s^{'}|s,a)V^{k}(s^{'}) \right)
+$$
+
+2. 返回一个确定性策略
+   $$
+   \pi^{'}(s)=\arg \max_{a} Q^{\pi}(s,a)=\arg \max_{a} \left( r(s,a) + \gamma \sum_{s^{'} \in S} P(s^{'}|s,a)V^{\pi}(s^{'}) \right)
+   $$
+
+#### 问题建模
+
+MDP定义：
+
+1. 状态$s$，定义为$(t,b,x_t)$，$S=\{0,...,T\} \times \{0,..,B\} \times X$
+
+2. 动作$A_{(t,b,x_t)}=\{0,...,b\}$
+
+3. 状态转移函数
+   $$
+   P((t-1,b-\delta,x_{t-1})|(t,b,x_t),a)=p_{x}(x_{t-1})m(\delta,x_t)
+   $$
+
+   $$
+   P((t-1,b,x_{t-1})|(t,b,x_t),a)=p_{x}(x_{t-1}) \sum_{\delta=a+1}^{\infin} m(\delta,x_t)
+   $$
+
+4. 奖励函数
+
+$$
+r(a, (t,b,x_t),(t-1,b-\delta,x_{t-1}))=\theta_{x}(x_{t})
+$$
+
+$$
+r(a, (t,b,x_t),(t-1,b,x_{t-1}))=0
+$$
+
